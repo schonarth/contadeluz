@@ -4,10 +4,11 @@
 beforeEach(module('ContaDeLuz'))
 
 describe("Conta de Luz", function() {
-	var $rootScope, scope;
+	var $rootScope, scope, AparelhosFactory;
 	
-	beforeEach(inject(function(_$rootScope_, AparelhosFactory) {
+	beforeEach(inject(function(_$rootScope_, _AparelhosFactory_) {
 		$rootScope = _$rootScope_;
+		AparelhosFactory = _AparelhosFactory_;
 		$rootScope.aparelhos = AparelhosFactory.getAparelhos();
 		
 		//scope = $rootScope.$new();
@@ -29,11 +30,24 @@ describe("Conta de Luz", function() {
 		expect(aparelhos.length).toBeGreaterThan(0);
 	});
 		
-	it("um aparelho tem suas propriedades básicas", function() {
+	it("um template de aparelho tem suas propriedades básicas", function() {
 		var aparelho = $rootScope.aparelhos[0];
+		console.debug("Checando template de aparelho", aparelho);
 		expect(aparelho).not.toBe(undefined);
 		expect(aparelho.nome).not.toBe(undefined);
 		expect(aparelho.potenciaPadrao).not.toBe(undefined);
 		expect(aparelho.horasUsoPadrao).not.toBe(undefined);
 	});
+	
+	it("calcula o consumo de um aparelho instanciado", function(){
+		var aparelho = AparelhosFactory.getAparelho($rootScope.aparelhos[0]);
+		console.debug("Instanciado aparelho", aparelho);
+		aparelho.tempoUso.dias = 1;
+		aparelho.tempoUso.horas = 2;
+		aparelho.quantidade = 1;
+		
+		var consumo = aparelho.getConsumo();
+		console.log("Consumo do " + aparelho.nome + " = " + consumo);
+		expect(consumo).toBeGreaterThan(0);
+	})
 });
