@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es3",
+        "noImplicitAny": false,
+        "outDir": "client/js",
+        "rootDir": ".",
+        "sourceMap": true,
+        "watch": true
+    },
+    "exclude": [
+        "node_modules",
+        "bower_components"
+    ]
+}
