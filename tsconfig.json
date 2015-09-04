@@ -3,8 +3,7 @@
         "module": "commonjs",
         "target": "es3",
         "noImplicitAny": false,
-        "outDir": "client/js",
-        "rootDir": ".",
+        "rootDir": "client/js",
         "sourceMap": true,
         "watch": true
     },
